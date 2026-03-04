@@ -1,0 +1,49 @@
+name: Publish
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+
+permissions: {}
+
+jobs:
+  prepare:
+    name: Prepare
+    runs-on: ubuntu-24.04
+    environment: publish-ghcr
+
+    permissions:
+      contents: read
+
+    outputs:
+      labels: ${{ steps.meta.outputs.labels }}
+      tags: ${{ steps.metadata.outputs.tags }}
+      version: ${{ steps.metadata.outputs.version }}
+    steps:
+      # Required for docker/metadata-action
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      # Automatically creates release tags based on the event
+      # e.g.:
+      # - if pushed to a branch and branch is 'main', then the tag will be 'main'.
+      # - if pushed a git tag, then the image tag will be the git tag value (e.g., v1.0.0)
+      - name: Generate Metadata
+        id: meta
+        uses: docker/metadata-action@c299e40c65443455700f0fdfc63efafe5b349051 # v5.10.0
+        with:
+          images: ghcr.io/saleor/sarif-to-annotations
+
+  build-push:
+    needs: prepare
+    uses: saleor/saleor-internal-actions/.github/workflows/build-push-image-multi-platform.yaml@eb0c692da7bf13f5e1a82c17488b24c514dd10a1 # v1.10.0
+    permissions:
+      contents: read
+      id-token: write # needed for AWS/ECR login (not used, but required permission)
+      packages: write # needed for GHCR
+    with:
+      enable-ghcr: true
+      oci-full-repository: ghcr.io/saleor/sarif-to-annotations
+      tags: ${{ needs.prepare-variables.outputs.tags }}
+      labels: ${{ needs.prepare-variables.outputs.labels }}

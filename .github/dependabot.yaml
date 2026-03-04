@@ -1,0 +1,22 @@
+# https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates
+version: 2
+updates:
+  - package-ecosystem: uv
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 3
+    cooldown:
+      default-days: 21 # 3 weeks
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 3
+    cooldown:
+      default-days: 21 # 3 weeks
+  - package-ecosystem: docker
+    directory: "/"
+    schedule:
+      interval: daily # base image needs to be bumped quickly (CPython)
+    open-pull-requests-limit: 3

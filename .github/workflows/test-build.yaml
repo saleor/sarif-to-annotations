@@ -1,0 +1,32 @@
+name: Test Build Image
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions: {}
+
+jobs:
+  test:
+    permissions:
+      contents: read
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Build Image
+        run: docker build -t sarif-to-annotations .
+
+      # If the image works, then PR should have annotations
+      - name: Run Simple Test
+        run: |
+          docker run \
+            -v ./:/workdir \
+            -w /workdir \
+            --pull=never \
+            sarif-to-annotations \
+            ./test/assets/semgrep-results-found.json
