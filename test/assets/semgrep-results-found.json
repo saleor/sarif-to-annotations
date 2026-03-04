@@ -1,0 +1,194 @@
+{
+  "version": "2.1.0",
+  "runs": [
+    {
+      "invocations": [
+        {
+          "executionSuccessful": true,
+          "toolExecutionNotifications": []
+        }
+      ],
+      "results": [
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "requires login"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".github/workflows/create-tag-with-release-pr.yml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 87,
+                  "endLine": 97,
+                  "snippet": {
+                    "text": "        run: |\n          export GITHUB_TOKEN=$( \\\n            curl --request GET --url ${{ secrets.VAULT_URL}} --header \"Authorization: JWT ${{ secrets.VAULT_JWT }}\" | jq -r .token \\\n          )\n\n          payload=$(\n              jq --arg version \"$VERSION\" --null-input '\n                {\n                  \"event_type\": \"deploy-staging\",\n                  \"client_payload\": {\"version\": $version}\n                }\n              '\n          )\n\n          gh api /repos/saleor/saleor-multitenant/dispatches --input - <<< \"$payload\""
+                  },
+                  "startColumn": 9,
+                  "startLine": 83
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "Potential script injection through string interpolation, use an intermediate environment variable instead of ${{ ... }}."
+          },
+          "properties": {},
+          "ruleId": "semgrep-rules.yaml.github-actions.security.audit.shell-script-injection"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "requires login"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".github/workflows/publish-load-test.yml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 50,
+                  "endLine": 20,
+                  "snippet": {
+                    "text": "        run:\n          set -x\n\n          branch=${{ github.event.pull_request.head.ref }}"
+                  },
+                  "startColumn": 9,
+                  "startLine": 17
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "Potential script injection through string interpolation, use an intermediate environment variable instead of ${{ ... }}."
+          },
+          "properties": {},
+          "ruleId": "semgrep-rules.yaml.github-actions.security.audit.shell-script-injection"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "requires login"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".github/workflows/publish-load-test.yml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 187,
+                  "endLine": 48,
+                  "snippet": {
+                    "text": "        run: |\n          curl -f -X POST \\\n            -H \"Accept: application/vnd.github.v3+json\" \\\n            -H \"Authorization: Bearer ${{ secrets.SALEOR_RELEASE_TOKEN }}\" \\\n            https://api.github.com/repos/saleor/saleor-multitenant/dispatches \\\n            -d \"{\\\"event_type\\\":\\\"deploy-load-test\\\",\\\"client_payload\\\":{\\\"version\\\":\\\"${{ needs.publish.outputs.version }}\\\",\\\"branch\\\":\\\"${{ github.event.pull_request.base.ref }}\\\"}}\""
+                  },
+                  "startColumn": 9,
+                  "startLine": 43
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "Potential script injection through string interpolation, use an intermediate environment variable instead of ${{ ... }}."
+          },
+          "properties": {},
+          "ruleId": "semgrep-rules.yaml.github-actions.security.audit.shell-script-injection"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "requires login"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".github/workflows/test-env-deploy.yml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 2,
+                  "endLine": 42,
+                  "snippet": {
+                    "text": "        run: |\n          echo \"domain=${{ steps.slugify-branch-name.outputs.result }}.api.saleor.rocks\" >> $GITHUB_OUTPUT"
+                  },
+                  "startColumn": 9,
+                  "startLine": 40
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "Potential script injection through string interpolation, use an intermediate environment variable instead of ${{ ... }}."
+          },
+          "properties": {},
+          "ruleId": "semgrep-rules.yaml.github-actions.security.audit.shell-script-injection"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "requires login"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".github/workflows/tests-and-linters.yml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 2,
+                  "endLine": 89,
+                  "snippet": {
+                    "text": "        run: |\n          uv run pytest \\\n            -m \"not e2e\" \\\n            --cov \\\n            --cov-report= \\\n            --junitxml=junit/test-results.xml \\\n            -o junit_family=legacy \\\n            --django-db-bench=${{ env.BENCH_PATH }} \\\n            -n logical"
+                  },
+                  "startColumn": 9,
+                  "startLine": 80
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "Potential script injection through string interpolation, use an intermediate environment variable instead of ${{ ... }}."
+          },
+          "properties": {},
+          "ruleId": "semgrep-rules.yaml.github-actions.security.audit.shell-script-injection"
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "Semgrep OSS",
+          "rules": [
+            {
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "fullDescription": {
+                "text": "Potential script injection through string interpolation, use an intermediate environment variable instead of ${{ ... }}."
+              },
+              "help": {
+                "markdown": "Potential script injection through string interpolation, use an intermediate environment variable instead of ${{ ... }}.\n\n<b>References:</b>\n - [https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#understanding-the-risk-of-script-injections](https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#understanding-the-risk-of-script-injections)\n",
+                "text": "Potential script injection through string interpolation, use an intermediate environment variable instead of ${{ ... }}."
+              },
+              "id": "semgrep-rules.yaml.github-actions.security.audit.shell-script-injection",
+              "name": "semgrep-rules.yaml.github-actions.security.audit.shell-script-injection",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+                  "HIGH CONFIDENCE",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: semgrep-rules.yaml.github-actions.security.audit.shell-script-injection"
+              }
+            }
+          ],
+          "semanticVersion": "1.153.1"
+        }
+      }
+    }
+  ],
+  "$schema": "https://docs.oasis-open.org/sarif/sarif/v2.1.0/os/schemas/sarif-schema-2.1.0.json"
+}

@@ -1,0 +1,48 @@
+{
+  "version": "2.1.0",
+  "runs": [
+    {
+      "invocations": [
+        {
+          "executionSuccessful": true,
+          "toolExecutionNotifications": []
+        }
+      ],
+      "results": [],
+      "tool": {
+        "driver": {
+          "name": "Semgrep OSS",
+          "rules": [
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
+                "text": "Comparing secrets using strings comparison operators is vulnerable to timing attacks. Use crypto.timingSafeEqual(a, b) instead.\n"
+              },
+              "help": {
+                "markdown": "Comparing secrets using strings comparison operators is vulnerable to timing attacks. Use crypto.timingSafeEqual(a, b) instead.\n\n\n<b>References:</b>\n - [https://snyk.io/blog/node-js-timing-attack-ccc-ctf/](https://snyk.io/blog/node-js-timing-attack-ccc-ctf/)\n",
+                "text": "Comparing secrets using strings comparison operators is vulnerable to timing attacks. Use crypto.timingSafeEqual(a, b) instead.\n"
+              },
+              "id": "semgrep-rules.typescript.lang.security.audit.timing-attack-comparison",
+              "name": "semgrep-rules.typescript.lang.security.audit.timing-attack-comparison",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-208: Observable Timing Discrepancy",
+                  "LOW CONFIDENCE",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: semgrep-rules.typescript.lang.security.audit.timing-attack-comparison"
+              }
+            }
+          ],
+          "semanticVersion": "1.153.1"
+        }
+      }
+    }
+  ],
+  "$schema": "https://docs.oasis-open.org/sarif/sarif/v2.1.0/os/schemas/sarif-schema-2.1.0.json"
+}

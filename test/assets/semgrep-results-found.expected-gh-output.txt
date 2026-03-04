@@ -1,0 +1,5 @@
+::error file=.github/workflows/create-tag-with-release-pr.yml,line=83::Potential script injection through string interpolation%2C use an intermediate environment variable instead of ${{ ... }}.
+::error file=.github/workflows/publish-load-test.yml,line=17::Potential script injection through string interpolation%2C use an intermediate environment variable instead of ${{ ... }}.
+::error file=.github/workflows/publish-load-test.yml,line=43::Potential script injection through string interpolation%2C use an intermediate environment variable instead of ${{ ... }}.
+::error file=.github/workflows/test-env-deploy.yml,line=40::Potential script injection through string interpolation%2C use an intermediate environment variable instead of ${{ ... }}.
+::error file=.github/workflows/tests-and-linters.yml,line=80::Potential script injection through string interpolation%2C use an intermediate environment variable instead of ${{ ... }}.
