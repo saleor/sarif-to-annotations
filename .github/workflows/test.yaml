@@ -34,8 +34,6 @@ jobs:
           # (from https://github.com/astral-sh/uv/releases)
           checksum: "9ac6cee4e379a5abfca06e78a777b26b7ba1f81cb7935b97054d80d85ac00774"
 
-      # Note: we don't use the official pre-commit action because it's mutable
-      # as it runs `pip install pre-commit` without any verification
       - name: Install Dependencies
         run: |
           uv sync --locked --inexact --dev
