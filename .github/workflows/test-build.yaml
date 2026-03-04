@@ -21,7 +21,6 @@ jobs:
       - name: Build Image
         run: docker build -t sarif-to-annotations .
 
-      # If the image works, then PR should have annotations
       - name: Run Simple Test
         run: |
           docker run \
