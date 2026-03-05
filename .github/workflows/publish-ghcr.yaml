@@ -2,7 +2,7 @@ name: Publish
 
 on:
   push:
-    branches: [main, "build/fix/ghcr-build"]
+    branches: [main]
     tags: ["v*"]
 
 permissions: {}
