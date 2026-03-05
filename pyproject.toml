@@ -1,0 +1,43 @@
+[build-system]
+requires = ["uv_build>=0.10.7,<0.11.0"]
+build-backend = "uv_build"
+
+[project.urls]
+Homepage = "https://github.com/saleor/sarif-to-annotations/"
+Repository = "https://github.com/saleor/sarif-to-annotations/"
+Issues = "https://github.com/saleor/sarif-to-annotations/issues/"
+
+[project.scripts]
+sarif-to-annotations = "sarif_to_annotations:main"
+
+[project]
+name = "sarif-to-annotations"
+version = "0.1.0"
+description = "Action converting SARIF files into GitHub annotations for pull requests."
+readme = "README.md"
+requires-python = ">=3.14"
+license = "BSD-3-Clause"
+authors = [
+  {name = "Saleor Commerce", email = "hello@saleor.io"},
+]
+classifiers=[
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Development Status :: 1 - Planning",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development :: Build Tools",
+    "Topic :: Software Development :: Quality Assurance",
+]
+dependencies = [
+    "pydantic>=2.12.5",
+]
+
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.2",
+]
+

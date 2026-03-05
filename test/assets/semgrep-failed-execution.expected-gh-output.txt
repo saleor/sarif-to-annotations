@@ -1,0 +1,2 @@
+::error::InvalidRuleSchemaError%3A One of these properties is missing%3A 'rules'
+::error::SemgrepError%3A invalid configuration file found (1 configs were invalid)
