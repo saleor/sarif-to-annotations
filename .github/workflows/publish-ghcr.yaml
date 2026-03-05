@@ -2,7 +2,7 @@ name: Publish
 
 on:
   push:
-    branches: [main]
+    branches: [main, "build/fix/ghcr-build"]
     tags: ["v*"]
 
 permissions: {}
@@ -18,8 +18,8 @@ jobs:
 
     outputs:
       labels: ${{ steps.meta.outputs.labels }}
-      tags: ${{ steps.metadata.outputs.tags }}
-      version: ${{ steps.metadata.outputs.version }}
+      tags: ${{ steps.meta.outputs.tags }}
+      version: ${{ steps.meta.outputs.version }}
     steps:
       # Required for docker/metadata-action
       - name: Checkout
@@ -45,5 +45,5 @@ jobs:
     with:
       enable-ghcr: true
       oci-full-repository: ghcr.io/saleor/sarif-to-annotations
-      tags: ${{ needs.prepare-variables.outputs.tags }}
-      labels: ${{ needs.prepare-variables.outputs.labels }}
+      tags: ${{ needs.prepare.outputs.tags }}
+      labels: ${{ needs.prepare.outputs.labels }}
