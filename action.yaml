@@ -1,0 +1,13 @@
+name: Sarif to GitHub Annotations
+description: Converts a SARIF file into a GitHub annotations.
+
+inputs:
+  sarif-file:
+    description: Path to the SARIF file.
+    required: true
+
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - ${{ inputs.sarif-file }}

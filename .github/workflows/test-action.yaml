@@ -1,0 +1,19 @@
+# Tests the GitHub Action (../../action.yaml). This creates annotations,
+# but they won't appear in the PR UI because GitHub only shows annotations
+# that are tied to lines modified in the pull request. Instead, they will
+# be visible in this workflow's logs.
+name: Test GitHub Action
+on:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Annotate
+        uses: ./
+        with:
+          sarif-file: ./test/assets/semgrep-failed-execution.json
